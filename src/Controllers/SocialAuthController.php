@@ -28,6 +28,10 @@ class SocialAuthController extends Controller
                 $user = User::where('social_login', $type)->where('social_id', $userProfile->identifier)->first();
 
                 if (!$user) {
+                    $user = User::where('email', $userProfile->email)->first();
+                   }
+
+                if (!$user) {
                     $user               = new User();
                     $user->name         = $userProfile->displayName;
                     $user->firstname    = $userProfile->firstName;
